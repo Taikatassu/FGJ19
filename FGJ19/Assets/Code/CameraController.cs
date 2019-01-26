@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraController : MonoBehaviour {
+public class CameraController : MonoBehaviour
+{
     private EventManager em;
     private bool followPlayer;
     private Transform t;
@@ -19,39 +20,46 @@ public class CameraController : MonoBehaviour {
     public float placementModeOrthSize = 10f;
     public float introModeInitialOrthSize = 30f;
 
-    private void OnEnable() {
+    private void OnEnable()
+    {
         t = transform;
         cam = GetComponent<Camera>();
         em = EventManager._instance;
         em.OnStartGame += OnStartGame;
-        em.OnPlacmentModeEnabled += OnPlacementModeEnabled;
+        em.OnPlacementModeEnabled += OnPlacementModeEnabled;
         em.OnPlacementModeDisabled += OnPlacementModeDisabled;
     }
 
-    private void OnDisable() {
+    private void OnDisable()
+    {
         em.OnStartGame -= OnStartGame;
-        em.OnPlacmentModeEnabled -= OnPlacementModeEnabled;
+        em.OnPlacementModeEnabled -= OnPlacementModeEnabled;
         em.OnPlacementModeDisabled -= OnPlacementModeDisabled;
     }
 
-    private void OnStartGame() {
+    private void OnStartGame()
+    {
         t.position = player.transform.position;
         cam.orthographicSize = introModeInitialOrthSize;
     }
 
-    private void OnPlacementModeEnabled(GameObject objectToPlace) {
+    private void OnPlacementModeEnabled(GameObject objectToPlace)
+    {
         followPlayer = false;
         cameraTargetPosition = Vector2.zero;
         currentOrthSize = placementModeOrthSize;
     }
 
-    private void OnPlacementModeDisabled() {
+    private void OnPlacementModeDisabled()
+    {
         followPlayer = true;
         currentOrthSize = playerModeOrthSize;
     }
 
-    private void Update() {
-        if(followPlayer) {
+    private void Update()
+    {
+        if (followPlayer)
+        {
             cameraTargetPosition = player.position;
         }
 

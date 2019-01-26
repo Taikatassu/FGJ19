@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     bool hookLerpOK = false;
     bool hookLerpReturn = false;
     bool playerLerpOK = false;
+    bool placementEnabled = false;
     public GameObject spawnableHook;
     GameObject hook;
     float currentHookLerpTime;
@@ -24,16 +25,41 @@ public class Player : MonoBehaviour
     Vector3 playerLerpStartPoint;
     Vector3 playerLerpTarget;
 
+    EventManager em;
+
     void Start()
     {
+        em = EventManager._instance;
         targetDirection = new GameObject("targetDirection").transform;
         travelPos = new GameObject("travelPos").transform;
         hook = Instantiate(spawnableHook, transform.position, transform.rotation);
         hook.GetComponent<Hook>().OnHookCollision += OnHookCollision;
+        em.BroadcastHookCreated(hook);
+
+    }
+    void OnEnable()
+    {
+        em.OnPlacementModeEnabled += OnPlacementModeEnabled;
+        em.OnPlacementModeDisabled += OnPlacementModeDisabled;
+    }
+    void OnDisable()
+    {
+        em.OnPlacementModeEnabled -= OnPlacementModeEnabled;
+        em.OnPlacementModeDisabled -= OnPlacementModeDisabled;
+    }
+
+    void OnPlacementModeEnabled(GameObject objectToPlace)
+    {
+        placementEnabled = true;
+    }
+    void OnPlacementModeDisabled()
+    {
+        placementEnabled = false;
     }
 
     void OnHookCollision(Collider2D col)
     {
+        //Use this col somehow to inform the canvas that this object can be delivered?
         print("paskaa");
         if (hookLerpOK)
         {
@@ -49,7 +75,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (!hookLerpOK && !hookLerpReturn && !playerLerpOK)
+        if (!hookLerpOK && !hookLerpReturn && !playerLerpOK && !placementEnabled)
         {
             if (Input.GetMouseButton(0))
             {
@@ -131,11 +157,9 @@ public class Player : MonoBehaviour
             //lerp!
             float perc = currentPlayerLerpTime / playerLerpTime;
             transform.position = Vector3.Lerp(playerLerpStartPoint, playerLerpTarget, perc);
-            print(currentPlayerLerpTime);
             if (currentPlayerLerpTime == playerLerpTime)
             {
                 playerLerpOK = false;
-                print("lerp finished");
             }
         }
     }
