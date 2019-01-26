@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 339482867007296345}
   - component: {fileID: 339482867007296327}
   - component: {fileID: 339482867007296326}
+  - component: {fileID: 716567387}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -58,16 +59,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4269a7a465b4b54cbd9ffceff94885f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectRadius: 2
+  objectRadius: 2.5
   minDistanceFromCenter: 6
   maxDistanceFromCenter: 50
   rejectionSamples: 20
   dynamicsParent: {fileID: 0}
   grabbablesToSpawn:
-  - {fileID: 11400000, guid: 6601bc29c75b97a4d9a7434d66dd367b, type: 2}
+  - {fileID: 11400000, guid: a79f3a4a617654b4790e2f57a5775418, type: 2}
   - {fileID: 11400000, guid: 6d414448ffcddcd4cb0dc7b4910f2269, type: 2}
-  - {fileID: 11400000, guid: 2bde016907fb0d7478e56a2c00094bc6, type: 2}
+  - {fileID: 11400000, guid: e1125e566cd57364783f18e00a7a5307, type: 2}
   - {fileID: 11400000, guid: 6c312f2b927def5479b137304d1b3cf1, type: 2}
+  - {fileID: 11400000, guid: 5fa3195d960f11d42a74623875c10fe9, type: 2}
+  - {fileID: 11400000, guid: 2bde016907fb0d7478e56a2c00094bc6, type: 2}
+  - {fileID: 11400000, guid: 633fc5f41647ed346878024b81f52cc2, type: 2}
+  - {fileID: 11400000, guid: 6601bc29c75b97a4d9a7434d66dd367b, type: 2}
+  - {fileID: 11400000, guid: f73de713e77d71a4d854ff686ab59c2b, type: 2}
+  - {fileID: 11400000, guid: c6bca5f26c3c12c4389bcf52da5aae83, type: 2}
+  - {fileID: 11400000, guid: 8f610af683f18214f8bec8ba5920bc8d, type: 2}
+  - {fileID: 11400000, guid: cf25e4efc1cf7574dbcc39c379c39ef8, type: 2}
+  - {fileID: 11400000, guid: f51d1d57e54681441b229b2db8a8a6e8, type: 2}
+  - {fileID: 11400000, guid: ea925976c229a954eb53b82f9650e2ae, type: 2}
+  - {fileID: 11400000, guid: 43306afd9454d594aa49d0c4ea1d1ece, type: 2}
+  - {fileID: 11400000, guid: 94be10cf7fa75e248960b4d2776d9385, type: 2}
+  - {fileID: 11400000, guid: cd27f89ef62d2b34283ac454b077ffd8, type: 2}
   spawnDensityFalloffTowardsRegionEdges:
     serializedVersion: 2
     m_Curve:
@@ -121,3 +135,18 @@ MonoBehaviour:
   testPlacementObject: {fileID: 1558024832798380884, guid: 4a58ae791c9d26744ac9ac77b7f9fefe,
     type: 3}
   testButton: 32
+--- !u!114 &716567387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 339482867007296347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1789b16ad9689c24ca1cd332d9b324c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timerBar: {fileID: 0}
+  gameOverUI: {fileID: 0}
+  disableControls: {fileID: 0}
