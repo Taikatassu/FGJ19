@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EventManager : MonoBehaviour
-{
+public class EventManager : MonoBehaviour {
+
     public static EventManager _instance;
 
     private void Awake() {
@@ -13,15 +13,23 @@ public class EventManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
-        //DontDestroyOnLoad(gameObject);
     }
 
     public delegate void EmptyVoid();
+    public delegate void GameObjectVoid(GameObject go);
 
     public event EmptyVoid OnStartGame;
     public void BroadcastStartGame() {
-        Debug.Log("Broadcasting game start!");
         OnStartGame?.Invoke();
+    }
+    
+    public event GameObjectVoid OnPlacmentModeEnabled;
+    public void BroadcastPlacementModeEnabled(GameObject objectToPlace) {
+        OnPlacmentModeEnabled?.Invoke(objectToPlace);
+    }
+
+    public event EmptyVoid OnPlacementModeDisabled;
+    public void BroadcastPlacementModeDisabled() {
+        OnPlacementModeDisabled?.Invoke();
     }
 }

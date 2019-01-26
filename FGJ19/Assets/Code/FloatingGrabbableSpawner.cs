@@ -38,11 +38,8 @@ public class FloatingGrabbableSpawner : MonoBehaviour {
 
     EventManager em;
 
-    private void Awake() {
-        em = EventManager._instance;
-    }
-
     private void OnEnable() {
+        em = EventManager._instance;
         em.OnStartGame += OnStartGame;
     }
 
