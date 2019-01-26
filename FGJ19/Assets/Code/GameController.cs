@@ -10,7 +10,7 @@ public class GameController : MonoBehaviour
     public Slider timerBar;
     public GameObject gameOverUI;
     public GameObject disableControls;
-    float decreasableAmount = 0.16f;
+    public float decreasableAmount = 0.016f;
     bool gameOvered = false;
 
 
@@ -30,6 +30,7 @@ public class GameController : MonoBehaviour
         else if (!gameOvered)
         {
             //DISABLE CONTROLS!!
+            //MOVE CAMERA TO PLANET!!
             GameOver();
         }
     }
@@ -52,5 +53,6 @@ public class GameController : MonoBehaviour
         disableControls.SetActive(false);
         timerBar.value = 1;
         gameOvered = false;
+        //MOVE CAMERA BACK TO PLAYER!!
     }
 }
