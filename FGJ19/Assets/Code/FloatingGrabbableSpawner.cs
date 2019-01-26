@@ -80,8 +80,20 @@ public class FloatingGrabbableSpawner : MonoBehaviour {
             Vector2 offset = -Vector2.one * halfRegionRadius;
             float spawnAreaRadius = maxDistanceFromCenter - minDistanceFromCenter;
 
-            foreach(var point in points) {
+            //Create a list of rarity thresholds
+            float[] grabbableRarityThresholds = new float[grabbablesToSpawn.Length];
+            grabbableRarityThresholds[0] = (grabbablesToSpawn[0].rarity);
+            Debug.Log("Rarity spawn threshold: " + grabbableRarityThresholds[0]);
+            for(int i = 1; i < grabbablesToSpawn.Length; i++) {
+                grabbableRarityThresholds[i] = (grabbableRarityThresholds[i - 1]
+                    + grabbablesToSpawn[i].rarity);
+                Debug.Log("Rarity spawn threshold: " + grabbableRarityThresholds[i]);
+            }
+            float maxRarityThreshold
+                = grabbableRarityThresholds[grabbableRarityThresholds.Length - 1];
 
+            foreach(var point in points) {
+                //Calculate placement for a grabbable on the planet surface
                 Vector2 spawnPosition = point + offset;
                 float positionDstFromMinEdge = spawnPosition.magnitude - minDistanceFromCenter;
                 float positionDstPercentage = positionDstFromMinEdge / spawnAreaRadius;
@@ -90,10 +102,26 @@ public class FloatingGrabbableSpawner : MonoBehaviour {
                     continue;
                 }
 
-                GameObject spawnedObject = Instantiate(grabbablesToSpawn[Random.Range(0,
-                    grabbablesToSpawn.Length)].grabbablePrefab, spawnPosition,
-                    Quaternion.Euler(Vector3.forward * Random.Range(0f, 360f)), grabbableParent);
+                //Choose random grabbable to spawn taking account the rarity weights
+                float spawnRandom = Random.value * maxRarityThreshold;
+                GrabbableInfo grabbableToSpawn = null;
+                for(int i = 0; i < grabbableRarityThresholds.Length; i++) {
+                    if(spawnRandom < grabbableRarityThresholds[i]) {
+                        grabbableToSpawn = grabbablesToSpawn[i];
+                        break;
+                    }
+                }
+
+                //Instantiate the chosen grabbable
+                GameObject spawnedObject = Instantiate(grabbableToSpawn.grabbablePrefab,
+                    spawnPosition, Quaternion.Euler(Vector3.forward * Random.Range(0f, 360f)),
+                    grabbableParent);
                 spawnedGrabbables.Add(spawnedObject);
+
+                //GameObject spawnedObject = Instantiate(grabbablesToSpawn[Random.Range(0,
+                //    grabbablesToSpawn.Length)].grabbablePrefab, spawnPosition,
+                //    Quaternion.Euler(Vector3.forward * Random.Range(0f, 360f)), grabbableParent);
+                //spawnedGrabbables.Add(spawnedObject);
             }
         }
     }
