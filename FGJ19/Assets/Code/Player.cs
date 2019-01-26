@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,32 +14,51 @@ public class Player : MonoBehaviour
     bool raycastSuccessful = false;
     bool hookLerpOK = false;
     bool hookLerpReturn = false;
-    Transform hook;
+    bool playerLerpOK = false;
+    public GameObject spawnableHook;
+    GameObject hook;
     float currentHookLerpTime;
     public float hookLerpTime;
+    float currentPlayerLerpTime;
+    public float playerLerpTime;
+    Vector3 playerLerpStartPoint;
+    Vector3 playerLerpTarget;
 
     void Start()
     {
         targetDirection = new GameObject("targetDirection").transform;
         travelPos = new GameObject("travelPos").transform;
-        hook = new GameObject("hook").transform;
+        hook = Instantiate(spawnableHook, transform.position, transform.rotation);
+        hook.GetComponent<Hook>().OnHookCollision += OnHookCollision;
+    }
+
+    void OnHookCollision(Collider2D col)
+    {
+        print("paskaa");
+        if (hookLerpOK)
+        {
+            hookLerpOK = false;
+            hookLerpReturn = false;
+            playerLerpStartPoint = transform.position;
+            playerLerpTarget = hook.transform.position;
+            currentPlayerLerpTime = 0;
+            playerLerpOK = true;
+        }
     }
 
 
     void Update()
     {
-        if (!hookLerpOK && !hookLerpReturn)
+        if (!hookLerpOK && !hookLerpReturn && !playerLerpOK)
         {
             if (Input.GetMouseButton(0))
             {
                 RaycastHit2D hitInfo = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Input.mousePosition));
                 Debug.DrawRay(Camera.main.ScreenPointToRay(Input.mousePosition).origin, Camera.main.ScreenPointToRay(Input.mousePosition).direction, Color.red, 5f);
-                print("raycasted");
                 if (hitInfo.collider != null)
                 {
                     raycastSuccessful = true;
                     targetDirection.position = hitInfo.point;
-                    print("raycast position: " + hitInfo.point);
 
                     //Make looker look at input position
                     //looker.transform.LookAt(targetDirection);
@@ -51,7 +71,6 @@ public class Player : MonoBehaviour
                 }
                 else
                 {
-                    print("raycast failed!");
                     raycastSuccessful = false;
                 }
             }
@@ -75,8 +94,7 @@ public class Player : MonoBehaviour
 
             //lerp!
             float perc = currentHookLerpTime / hookLerpTime;
-            hook.position = Vector3.Lerp(transform.position, travelPos.position, perc);
-            print("currenthooklerptime = " + currentHookLerpTime);
+            hook.transform.position = Vector3.Lerp(transform.position, travelPos.position, perc);
             if (currentHookLerpTime == hookLerpTime)
             {
                 hookLerpOK = false;
@@ -95,11 +113,29 @@ public class Player : MonoBehaviour
 
             //lerp!
             float perc = currentHookLerpTime / hookLerpTime;
-            hook.position = Vector3.Lerp(travelPos.position, transform.position, perc);
-            print("currenthooklerptime = " + currentHookLerpTime);
+            hook.transform.position = Vector3.Lerp(travelPos.position, transform.position, perc);
             if (currentHookLerpTime == hookLerpTime)
             {
                 hookLerpReturn = false;
+            }
+        }
+        if (playerLerpOK)
+        {
+            //increment timer once per frame
+            currentPlayerLerpTime += Time.deltaTime;
+            if (currentPlayerLerpTime > playerLerpTime)
+            {
+                currentPlayerLerpTime = playerLerpTime;
+            }
+
+            //lerp!
+            float perc = currentPlayerLerpTime / playerLerpTime;
+            transform.position = Vector3.Lerp(playerLerpStartPoint, playerLerpTarget, perc);
+            print(currentPlayerLerpTime);
+            if (currentPlayerLerpTime == playerLerpTime)
+            {
+                playerLerpOK = false;
+                print("lerp finished");
             }
         }
     }

@@ -96,7 +96,10 @@ MonoBehaviour:
   looker: {fileID: 1780419660967783906}
   rotator: {fileID: 1780419660600467318}
   reticle: {fileID: 1780419660667628187}
+  spawnableHook: {fileID: 5326835847381715084, guid: dd15c63e25049064b8e3c897c4517109,
+    type: 3}
   hookLerpTime: 0.35
+  playerLerpTime: 0.35
 --- !u!1 &1780419660600467318
 GameObject:
   m_ObjectHideFlags: 0

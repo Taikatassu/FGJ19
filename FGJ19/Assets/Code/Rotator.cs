@@ -32,12 +32,9 @@ public class Rotator : MonoBehaviour
             //lerp!
             float perc = currentLerpTime / lerpTime;
             float angle = Mathf.LerpAngle(trueRotAngle, -trueRotAngle, perc);
-            print(angle);
             transform.localEulerAngles = new Vector3(0, 0, angle);
-            print("currenthooklerptime = " + currentLerpTime);
             if (currentLerpTime == lerpTime)
             {
-                print("turning left");
                 rotateRight = false;
                 rotateLeft = true;
                 currentLerpTime = 0;
@@ -55,12 +52,9 @@ public class Rotator : MonoBehaviour
             //lerp!
             float perc = currentLerpTime / lerpTime;
             float angle = Mathf.LerpAngle(-trueRotAngle, trueRotAngle, perc);
-            print(angle);
             transform.localEulerAngles = new Vector3(0, 0, angle);
-            print("currenthooklerptime = " + currentLerpTime);
             if (currentLerpTime == lerpTime)
             {
-                print("turning right");
                 rotateLeft = false;
                 rotateRight = true;
                 currentLerpTime = 0;
