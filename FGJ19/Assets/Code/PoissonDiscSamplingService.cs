@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class PoissonDiscSampling {
+public static class PoissonDiscSamplingService {
 
-    //TODO: 
+    //TODO:
+    //Variant point radii
     //Placement density fading towards edges 
     //  (= increase radius when further away from center point?)
 
     public static List<Vector2> GeneratePoints(float radius, float minDistanceFromCenter,
-        float maxDistanceFromCenter, int numSamplesBeforeRejection = 30) {
+        float maxDistanceFromCenter, int numSamplesBeforeRejection ) {
 
         float sampleRegionSize = maxDistanceFromCenter * 2 + 1;
         float cellSize = radius / Mathf.Sqrt(2);
@@ -19,10 +20,10 @@ public static class PoissonDiscSampling {
         List<Vector2> points = new List<Vector2>();
         List<Vector2> spawnPoints = new List<Vector2>();
         float sqrMinDistanceFromCenter = minDistanceFromCenter * minDistanceFromCenter;
-        float sqrMaxDistanceFromCenter = maxDistanceFromCenter * maxDistanceFromCenter;   
+        float sqrMaxDistanceFromCenter = maxDistanceFromCenter * maxDistanceFromCenter;
         Vector2 areaCenter = Vector2.one * sampleRegionSize / 2;
 
-        spawnPoints.Add(areaCenter + Vector2.up * minDistanceFromCenter);// * 1.5f);
+        spawnPoints.Add(areaCenter + Vector2.up * minDistanceFromCenter);
         while(spawnPoints.Count > 0) {
             int spawnIndex = Random.Range(0, spawnPoints.Count);
             Vector2 spawnCenter = spawnPoints[spawnIndex];
@@ -36,7 +37,7 @@ public static class PoissonDiscSampling {
                 if(IsValid(candidate, sampleRegionSize, areaCenter, sqrMinDistanceFromCenter,
                     sqrMaxDistanceFromCenter, cellSize, radius, points, grid)) {
                     spawnPoints.Add(candidate);
-                    
+
                     points.Add(candidate);
                     grid[(int)(candidate.x / cellSize), (int)(candidate.y / cellSize)]
                         = points.Count;
@@ -59,7 +60,7 @@ public static class PoissonDiscSampling {
 
         if(candidate.x >= 0 && candidate.x < sampleRegionRadius
             && candidate.y >= 0 && candidate.y < sampleRegionRadius) {
-            
+
             float sqrDstToCenter = (candidate - areaCenter).sqrMagnitude;
             if(sqrDstToCenter < sqrMinDistanceFromCenter
                 || sqrDstToCenter > sqrMaxDistanceFromCenter) {

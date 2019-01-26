@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e256a1f8af33844dacb7281eddc1af4, type: 3}
+  m_Name: Outhouse
+  m_EditorClassIdentifier: 
+  floatingPrefab: {fileID: 1558024832798380884, guid: 4a58ae791c9d26744ac9ac77b7f9fefe,
+    type: 3}
+  groundedPrefab: {fileID: 5355889566461481602, guid: 2b38965fe8d580b43847226b75741c06,
+    type: 3}
