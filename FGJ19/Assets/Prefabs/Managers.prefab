@@ -64,10 +64,10 @@ MonoBehaviour:
   rejectionSamples: 20
   dynamicsParent: {fileID: 0}
   grabbablesToSpawn:
-  - {fileID: 11400000, guid: b5b3b8f8f2339b74289db61b587e0e67, type: 2}
-  - {fileID: 11400000, guid: c2fd52a5129570842ba3aa43ff084a27, type: 2}
-  - {fileID: 11400000, guid: bff8b1995448f9f4bb4c9097df52c369, type: 2}
-  - {fileID: 11400000, guid: 7848a652d2110b040998a748f04f5dcd, type: 2}
+  - {fileID: 11400000, guid: 6601bc29c75b97a4d9a7434d66dd367b, type: 2}
+  - {fileID: 11400000, guid: 6d414448ffcddcd4cb0dc7b4910f2269, type: 2}
+  - {fileID: 11400000, guid: 2bde016907fb0d7478e56a2c00094bc6, type: 2}
+  - {fileID: 11400000, guid: 6c312f2b927def5479b137304d1b3cf1, type: 2}
   spawnDensityFalloffTowardsRegionEdges:
     serializedVersion: 2
     m_Curve:
@@ -116,7 +116,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ac8f9b9e33b076419d186d8dc9bb701, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  planetRadius: 4.1
   dynamicsParent: {fileID: 0}
-  testPlacementObject: {fileID: 5355889566461481602, guid: 2b38965fe8d580b43847226b75741c06,
+  testPlacementObject: {fileID: 1558024832798380884, guid: 4a58ae791c9d26744ac9ac77b7f9fefe,
     type: 3}
-  planetRadius: 3.5
+  testButton: 32
