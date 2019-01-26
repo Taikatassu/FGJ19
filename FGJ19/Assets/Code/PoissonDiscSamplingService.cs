@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public static class PoissonDiscSamplingService {
-
-    //TODO:
-    //Variant point radii
-
+    
     public static List<Vector2> GeneratePoints(float pointRadius, float minDistanceFromCenter,
         float maxDistanceFromCenter, int numSamplesBeforeRejection ) {
 

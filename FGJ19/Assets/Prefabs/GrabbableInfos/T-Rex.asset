@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0e256a1f8af33844dacb7281eddc1af4, type: 3}
-  m_Name: Cow
+  m_Name: T-Rex
   m_EditorClassIdentifier: 
-  floatingPrefab: {fileID: 7771691770560914457, guid: 9ce0af142bf65c94d85325a7395fb317,
+  grabbablePrefab: {fileID: 5237190215362364671, guid: 9f2e06147d28235438c44b31b66d0a79,
     type: 3}
-  groundedPrefab: {fileID: 0}
+  rarity: 0.5

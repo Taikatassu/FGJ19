@@ -10,9 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0e256a1f8af33844dacb7281eddc1af4, type: 3}
-  m_Name: Tree
+  m_Name: Cow
   m_EditorClassIdentifier: 
-  floatingPrefab: {fileID: 2403099953521226900, guid: fd318b4967329b245843d79706746f18,
+  grabbablePrefab: {fileID: 7771691770560914457, guid: 9ce0af142bf65c94d85325a7395fb317,
     type: 3}
-  groundedPrefab: {fileID: 1561989538939917984, guid: 68cdd01d14aebae4ea61db1884ea6d99,
-    type: 3}
+  rarity: 1

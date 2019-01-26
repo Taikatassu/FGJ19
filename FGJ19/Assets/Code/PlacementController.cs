@@ -33,6 +33,7 @@ public class PlacementController : MonoBehaviour {
     private void OnPlacementModeEnabled(GameObject newObjectToPlace) {
         placementModeState = true;
         objectToPlace = Instantiate(newObjectToPlace, dynamicsParent);
+        objectToPlace.GetComponent<RandomRotator>().enabled = false;
     }
 
     private void OnPlacementModeDisabled() {

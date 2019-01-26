@@ -19,9 +19,6 @@ public class FloatingGrabbaleSpawnerEditor : Editor {
 
 public class FloatingGrabbableSpawner : MonoBehaviour {
 
-    //TODO:
-    //Object spawn rarity?
-
     public float objectRadius = 0.5f;
     public float minDistanceFromCenter = 2f;
     public float maxDistanceFromCenter = 15.0f;
@@ -94,7 +91,7 @@ public class FloatingGrabbableSpawner : MonoBehaviour {
                 }
 
                 GameObject spawnedObject = Instantiate(grabbablesToSpawn[Random.Range(0,
-                    grabbablesToSpawn.Length)].floatingPrefab, spawnPosition,
+                    grabbablesToSpawn.Length)].grabbablePrefab, spawnPosition,
                     Quaternion.Euler(Vector3.forward * Random.Range(0f, 360f)), grabbableParent);
                 spawnedGrabbables.Add(spawnedObject);
             }

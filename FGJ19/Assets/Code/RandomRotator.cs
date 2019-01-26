@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RandomRotatior : MonoBehaviour {
+public class RandomRotator : MonoBehaviour {
     public float minRotationSpeed = 5f;
     public float maxRotationSpeed = 25f;
 

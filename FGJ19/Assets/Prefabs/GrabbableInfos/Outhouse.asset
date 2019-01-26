@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e256a1f8af33844dacb7281eddc1af4, type: 3}
   m_Name: Outhouse
   m_EditorClassIdentifier: 
-  floatingPrefab: {fileID: 1558024832798380884, guid: 4a58ae791c9d26744ac9ac77b7f9fefe,
+  grabbablePrefab: {fileID: 1558024832798380884, guid: 4a58ae791c9d26744ac9ac77b7f9fefe,
     type: 3}
-  groundedPrefab: {fileID: 5355889566461481602, guid: 2b38965fe8d580b43847226b75741c06,
-    type: 3}
+  rarity: 1
