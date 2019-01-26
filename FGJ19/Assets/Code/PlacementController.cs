@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlacementController : MonoBehaviour
-{
+public class PlacementController : MonoBehaviour {
 
     private EventManager em;
     private Camera mainCamera;
     private bool placementModeState = false;
     private GameObject objectToPlace;
     private List<GameObject> placedObjects;
+    private bool mouseDownAfterPlacementModeEnabled = false;
 
     public float planetRadius;
     public Transform dynamicsParent;
@@ -17,8 +17,7 @@ public class PlacementController : MonoBehaviour
     public GameObject testPlacementObject;
     public KeyCode testButton = KeyCode.Space;
 
-    private void OnEnable()
-    {
+    private void OnEnable() {
         placedObjects = new List<GameObject>();
         mainCamera = Camera.main;
 
@@ -27,47 +26,47 @@ public class PlacementController : MonoBehaviour
         em.OnPlacementModeDisabled += OnPlacementModeDisabled;
     }
 
-    private void OnDisable()
-    {
+    private void OnDisable() {
         em.OnPlacementModeEnabled -= OnPlacementModeEnabled;
         em.OnPlacementModeDisabled -= OnPlacementModeDisabled;
     }
 
-    private void OnPlacementModeEnabled(GameObject newObjectToPlace)
-    {
+    private void OnPlacementModeEnabled(GameObject newObjectToPlace) {
+        if(newObjectToPlace == null) {
+            Debug.LogWarning("Prevented placement mode enabling with null object reference!");
+            return;
+        }
+
         placementModeState = true;
+        mouseDownAfterPlacementModeEnabled = false;
         objectToPlace = Instantiate(newObjectToPlace, dynamicsParent);
         objectToPlace.GetComponent<RandomRotator>().enabled = false;
     }
 
-    private void OnPlacementModeDisabled()
-    {
+    private void OnPlacementModeDisabled() {
         placementModeState = false;
 
-        if (objectToPlace != null)
-        {
+        if(objectToPlace != null) {
             Destroy(objectToPlace);
             objectToPlace = null;
         }
     }
 
-    private void Update()
-    {
+    IEnumerator WaitToDisablePlacement() {
+        yield return new WaitForEndOfFrame();
+        em.BroadcastPlacementModeDisabled();
+    }
 
-        if (Input.GetKeyDown(testButton))
-        {
-            if (!placementModeState)
-            {
+    private void Update() {
+        if(Input.GetKeyDown(testButton)) {
+            if(!placementModeState) {
                 em.BroadcastPlacementModeEnabled(testPlacementObject);
-            }
-            else
-            {
+            } else {
                 em.BroadcastPlacementModeDisabled();
             }
         }
 
-        if (placementModeState)
-        {
+        if(placementModeState) {
             Vector2 inputPosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
             Vector2 snappedPosition = inputPosition.normalized * planetRadius;
 
@@ -75,12 +74,16 @@ public class PlacementController : MonoBehaviour
             objectToPlace.transform.rotation
                 = Quaternion.LookRotation(Vector3.forward, snappedPosition);
 
-            if (Input.GetMouseButtonUp(0))
-            {
+            if(Input.GetMouseButtonDown(0)) {
+                mouseDownAfterPlacementModeEnabled = true;
+            }
+
+            if(Input.GetMouseButtonUp(0) && mouseDownAfterPlacementModeEnabled) {
                 placedObjects.Add(objectToPlace);
                 objectToPlace = null;
                 placementModeState = false;
-                em.BroadcastPlacementModeDisabled();
+                em.BroadcastPlacedObjectCountChanged(placedObjects.Count);
+                StartCoroutine("WaitToDisablePlacement");
             }
         }
     }

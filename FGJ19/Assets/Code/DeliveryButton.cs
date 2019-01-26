@@ -2,36 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeliveryButton : MonoBehaviour
-{
+public class DeliveryButton : MonoBehaviour {
     EventManager em;
     GameObject hook;
     GameObject grabbedObject;
 
-    void Awake()
-    {
-        print("AWAKE!!");
+    void Awake() {
         em = EventManager._instance;
         em.OnHookCreated += OnHookCreated;
         gameObject.SetActive(false);
     }
 
-    void OnHookCreated(GameObject newHook)
-    {
+    void OnHookCreated(GameObject newHook) {
         hook = newHook;
         hook.GetComponent<Hook>().OnHookCollision += OnHookCollision;
     }
 
-    void OnHookCollision(Collider2D col)
-    {
-        print("moiii");
+    void OnHookCollision(Collider2D col) {
+        print("DeliveryButton.OnHookCollision");
         gameObject.SetActive(true);
         grabbedObject = col.gameObject;
     }
 
-    public void Deliver()
-    {
+    public void Deliver() {
+        print("DeliveryButton.Deliver");
         em.BroadcastPlacementModeEnabled(grabbedObject);
         Destroy(grabbedObject);
+        gameObject.SetActive(false);
     }
 }

@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: bb50e76171069204aaf6b5c5bcc5bbf6
+=======
+guid: c251c89794d014649a7eb5094a345884
+>>>>>>> Object placement counter script. Hook line visualization.
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

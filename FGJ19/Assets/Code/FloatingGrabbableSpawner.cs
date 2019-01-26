@@ -83,11 +83,9 @@ public class FloatingGrabbableSpawner : MonoBehaviour {
             //Create a list of rarity thresholds
             float[] grabbableRarityThresholds = new float[grabbablesToSpawn.Length];
             grabbableRarityThresholds[0] = (grabbablesToSpawn[0].rarity);
-            Debug.Log("Rarity spawn threshold: " + grabbableRarityThresholds[0]);
             for(int i = 1; i < grabbablesToSpawn.Length; i++) {
                 grabbableRarityThresholds[i] = (grabbableRarityThresholds[i - 1]
                     + grabbablesToSpawn[i].rarity);
-                Debug.Log("Rarity spawn threshold: " + grabbableRarityThresholds[i]);
             }
             float maxRarityThreshold
                 = grabbableRarityThresholds[grabbableRarityThresholds.Length - 1];
