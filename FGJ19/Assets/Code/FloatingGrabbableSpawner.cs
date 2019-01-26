@@ -18,13 +18,18 @@ public class FloatingGrabbaleSpawnerEditor : Editor {
 }
 
 public class FloatingGrabbableSpawner : MonoBehaviour {
-    public float radius = 0.5f;
+
+    //TODO:
+    //Object spawn rarity?
+
+    public float objectRadius = 0.5f;
     public float minDistanceFromCenter = 2f;
     public float maxDistanceFromCenter = 15.0f;
     public int rejectionSamples = 30;
 
     public Transform dynamicsParent;
     public GrabbableInfo[] grabbablesToSpawn;
+    public AnimationCurve spawnDensityFalloffTowardsRegionEdges;
 
     List<Vector2> points;
     List<GameObject> spawnedGrabbables;
@@ -56,7 +61,7 @@ public class FloatingGrabbableSpawner : MonoBehaviour {
     }
 
     private void CalculatePoints() {
-        points = PoissonDiscSamplingService.GeneratePoints(radius, minDistanceFromCenter,
+        points = PoissonDiscSamplingService.GeneratePoints(objectRadius, minDistanceFromCenter,
             maxDistanceFromCenter, rejectionSamples);
     }
 
@@ -79,10 +84,20 @@ public class FloatingGrabbableSpawner : MonoBehaviour {
             float regionRadius = maxDistanceFromCenter * 2 + 1f;
             float halfRegionRadius = regionRadius / 2;
             Vector2 offset = -Vector2.one * halfRegionRadius;
+            float spawnAreaRadius = maxDistanceFromCenter - minDistanceFromCenter;
 
             foreach(var point in points) {
+
+                Vector2 spawnPosition = point + offset;
+                float positionDstFromMinEdge = spawnPosition.magnitude - minDistanceFromCenter;
+                float positionDstPercentage = positionDstFromMinEdge / spawnAreaRadius;
+                if(Random.value > spawnDensityFalloffTowardsRegionEdges.
+                    Evaluate(positionDstPercentage)) {
+                    continue;
+                }
+
                 GameObject spawnedObject = Instantiate(grabbablesToSpawn[Random.Range(0,
-                    grabbablesToSpawn.Length)].floatingPrefab, point + offset,
+                    grabbablesToSpawn.Length)].floatingPrefab, spawnPosition,
                     Quaternion.Euler(Vector3.forward * Random.Range(0f, 360f)), grabbableParent);
                 spawnedGrabbables.Add(spawnedObject);
             }

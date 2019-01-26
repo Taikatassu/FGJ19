@@ -6,14 +6,12 @@ public static class PoissonDiscSamplingService {
 
     //TODO:
     //Variant point radii
-    //Placement density fading towards edges 
-    //  (= increase radius when further away from center point?)
 
-    public static List<Vector2> GeneratePoints(float radius, float minDistanceFromCenter,
+    public static List<Vector2> GeneratePoints(float pointRadius, float minDistanceFromCenter,
         float maxDistanceFromCenter, int numSamplesBeforeRejection ) {
 
         float sampleRegionSize = maxDistanceFromCenter * 2 + 1;
-        float cellSize = radius / Mathf.Sqrt(2);
+        float cellSize = pointRadius / Mathf.Sqrt(2);
 
         int[,] grid = new int[Mathf.CeilToInt(sampleRegionSize / cellSize),
             Mathf.CeilToInt(sampleRegionSize / cellSize)];
@@ -32,10 +30,10 @@ public static class PoissonDiscSamplingService {
             for(int i = 0; i < numSamplesBeforeRejection; i++) {
                 float angle = Random.value * Mathf.PI * 2;
                 Vector2 dir = new Vector2(Mathf.Sin(angle), Mathf.Cos(angle));
-                Vector2 candidate = spawnCenter + dir * Random.Range(radius, 2 * radius);
+                Vector2 candidate = spawnCenter + dir * Random.Range(pointRadius, 2 * pointRadius);
 
                 if(IsValid(candidate, sampleRegionSize, areaCenter, sqrMinDistanceFromCenter,
-                    sqrMaxDistanceFromCenter, cellSize, radius, points, grid)) {
+                    sqrMaxDistanceFromCenter, cellSize, pointRadius, points, grid)) {
                     spawnPoints.Add(candidate);
 
                     points.Add(candidate);
@@ -56,7 +54,7 @@ public static class PoissonDiscSamplingService {
 
     private static bool IsValid(Vector2 candidate, float sampleRegionRadius, Vector2 areaCenter,
         float sqrMinDistanceFromCenter, float sqrMaxDistanceFromCenter, float cellSize,
-        float radius, List<Vector2> points, int[,] grid) {
+        float pointRadius, List<Vector2> points, int[,] grid) {
 
         if(candidate.x >= 0 && candidate.x < sampleRegionRadius
             && candidate.y >= 0 && candidate.y < sampleRegionRadius) {
@@ -80,7 +78,7 @@ public static class PoissonDiscSamplingService {
                     int pointIndex = grid[x, y] - 1;
                     if(pointIndex != -1) {
                         float sqrDstToOtherPoint = (candidate - points[pointIndex]).sqrMagnitude;
-                        if(sqrDstToOtherPoint < radius * radius) {
+                        if(sqrDstToOtherPoint < pointRadius * pointRadius) {
                             return false;
                         }
                     }
