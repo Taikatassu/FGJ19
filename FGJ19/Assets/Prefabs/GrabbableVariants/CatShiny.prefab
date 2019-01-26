@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &7350252152409815730
+--- !u!1001 &5964989789141949810
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 8331202150285748710, guid: f80e73ce75e767c42b4d75d278b33e0c,
         type: 3}
       propertyPath: m_Name
-      value: Outhouse
+      value: CatShiny
       objectReference: {fileID: 0}
     - target: {fileID: 8331202150285748713, guid: f80e73ce75e767c42b4d75d278b33e0c,
         type: 3}
@@ -84,19 +84,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8331202151651350017, guid: f80e73ce75e767c42b4d75d278b33e0c,
         type: 3}
-      propertyPath: m_Color.b
+      propertyPath: m_Color.g
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8331202151651350017, guid: f80e73ce75e767c42b4d75d278b33e0c,
         type: 3}
-      propertyPath: m_Color.g
+      propertyPath: m_Color.b
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8331202151651350017, guid: f80e73ce75e767c42b4d75d278b33e0c,
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300022, guid: 05168151ad960a54ab4311d7f608591e,
+      objectReference: {fileID: 21300006, guid: aed58414aa20aaa4091ded8f30d70bfa,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f80e73ce75e767c42b4d75d278b33e0c, type: 3}

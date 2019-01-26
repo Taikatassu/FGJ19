@@ -14,6 +14,7 @@ TextureImporter:
     21300018: GrabbablesTex_9
     21300020: GrabbablesTex_10
     21300022: GrabbablesTex_11
+    21300024: GrabbablesTex_12
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -99,10 +100,10 @@ TextureImporter:
       name: GrabbablesTex_0
       rect:
         serializedVersion: 2
-        x: 1264
-        y: 1385
-        width: 558
-        height: 663
+        x: 173
+        y: 1516
+        width: 348
+        height: 436
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -110,7 +111,27 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dfcc2b2e2a2c83b4a8dbc2d63d19bce5
+      spriteID: c4d6ed216e9c1ed46a7191c58daceb14
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GrabbablesTex_1
+      rect:
+        serializedVersion: 2
+        x: 697
+        y: 1362
+        width: 448
+        height: 669
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39e9e13ca837cdc4c8610981e51625ee
       vertices: []
       indices: 
       edges: []
@@ -119,10 +140,10 @@ TextureImporter:
       name: GrabbablesTex_2
       rect:
         serializedVersion: 2
-        x: 60
-        y: 1504
-        width: 384
-        height: 502
+        x: 1387
+        y: 1507
+        width: 470
+        height: 485
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,7 +151,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b2602872d05dd934d9ed7d3ebfef2777
+      spriteID: b2b90979fa2007f4d966b6abba58d7ca
       vertices: []
       indices: 
       edges: []
@@ -139,10 +160,10 @@ TextureImporter:
       name: GrabbablesTex_3
       rect:
         serializedVersion: 2
-        x: 763
-        y: 1585
-        width: 362
-        height: 371
+        x: 1956
+        y: 1503
+        width: 386
+        height: 503
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,7 +171,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8fd6e7978b4d58e468ec58efcbe177cc
+      spriteID: cb3e02bd45fb0c247901089cfb61ccaa
       vertices: []
       indices: 
       edges: []
@@ -159,10 +180,10 @@ TextureImporter:
       name: GrabbablesTex_4
       rect:
         serializedVersion: 2
-        x: 10
-        y: 840
-        width: 541
-        height: 512
+        x: 9
+        y: 817
+        width: 537
+        height: 515
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -170,7 +191,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e39fa4b48e7ab6c449d9286cdea8d16d
+      spriteID: d1598c9a451714540987a8159c3aefb6
       vertices: []
       indices: 
       edges: []
@@ -179,10 +200,10 @@ TextureImporter:
       name: GrabbablesTex_5
       rect:
         serializedVersion: 2
-        x: 694
-        y: 950
-        width: 571
-        height: 434
+        x: 692
+        y: 866
+        width: 574
+        height: 426
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -190,7 +211,107 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9da8331d6a9f1a247a24f9d7bf37bf59
+      spriteID: 98dbb94d9aa2a414ab041ed6cbcf3e3d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GrabbablesTex_6
+      rect:
+        serializedVersion: 2
+        x: 913
+        y: 1288
+        width: 11
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d74a4970bbd58614686f4ce04bf82b02
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GrabbablesTex_7
+      rect:
+        serializedVersion: 2
+        x: 1428
+        y: 817
+        width: 384
+        height: 527
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc179e34676b2714fb1d47923469658e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GrabbablesTex_8
+      rect:
+        serializedVersion: 2
+        x: 1960
+        y: 817
+        width: 480
+        height: 489
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c54b103c75f642248b5ae6d44f717e6e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GrabbablesTex_9
+      rect:
+        serializedVersion: 2
+        x: 645
+        y: 76
+        width: 560
+        height: 666
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76bfbce87cfe94f43aacf06279dbbbb5
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GrabbablesTex_10
+      rect:
+        serializedVersion: 2
+        x: 1220
+        y: 714
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2443b48c9926e2479293a76e0d25b22
       vertices: []
       indices: 
       edges: []
@@ -199,10 +320,10 @@ TextureImporter:
       name: GrabbablesTex_11
       rect:
         serializedVersion: 2
-        x: 1329
-        y: 840
-        width: 477
-        height: 488
+        x: 144
+        y: 268
+        width: 364
+        height: 381
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -210,7 +331,27 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fc8e964d0579fd94ab5e3cbc5d8c1de2
+      spriteID: 81e561cea283aba4ba178909b7c62539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GrabbablesTex_12
+      rect:
+        serializedVersion: 2
+        x: 545
+        y: 596
+        width: 6
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8628636ab8abe2d4388360971d4e5e54
       vertices: []
       indices: 
       edges: []
