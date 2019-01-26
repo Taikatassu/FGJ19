@@ -30,7 +30,9 @@ public class Player : MonoBehaviour {
         targetDirection = new GameObject("targetDirection").transform;
         travelPos = new GameObject("travelPos").transform;
         hook = Instantiate(spawnableHook, transform.position, transform.rotation);
-        hook.GetComponent<Hook>().OnHookCollision += OnHookCollision;
+        Hook hookScript = hook.GetComponent<Hook>();
+        hookScript.OnHookCollision += OnHookCollision;
+        hookScript.player = transform;
         em.BroadcastHookCreated(hook);
     }
 
