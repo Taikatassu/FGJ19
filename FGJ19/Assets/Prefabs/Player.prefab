@@ -100,6 +100,7 @@ MonoBehaviour:
   reticle: {fileID: 1780419660667628187}
   spawnableHook: {fileID: 5326835847381715084, guid: dd15c63e25049064b8e3c897c4517109,
     type: 3}
+  hookVFX: {fileID: 1992523829411524322, guid: 87891aa8466592d4aab18056929b86f5, type: 3}
   hookLerpTime: 0.35
   playerLerpTime: 0.35
 --- !u!120 &2145762567228458155

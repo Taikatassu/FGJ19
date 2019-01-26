@@ -17,6 +17,7 @@ public class Player : MonoBehaviour {
     bool placementEnabled = false;
     public GameObject spawnableHook;
     GameObject hook;
+    public GameObject hookVFX;
     float currentHookLerpTime;
     public float hookLerpTime;
     float currentPlayerLerpTime;
@@ -65,6 +66,7 @@ public class Player : MonoBehaviour {
             hookLerpReturn = false;
             playerLerpStartPoint = transform.position;
             playerLerpTarget = hook.transform.position;
+            Instantiate(hookVFX, new Vector3(hook.transform.position.x, hook.transform.position.y, -1), Quaternion.identity);
             currentPlayerLerpTime = 0;
             playerLerpOK = true;
         }
