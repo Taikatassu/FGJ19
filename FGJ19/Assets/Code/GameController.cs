@@ -15,8 +15,11 @@ public class GameController : MonoBehaviour
     public float decreasableAmount = 0.016f;
     public GameObject disableOnGameOver;
     public GameObject mainMenu;
+    public GameObject credits;
+    public Text creditsButtonText;
     public Player player;
     bool gameStarted = false;
+    bool creditsEnabled = false;
 
 
     void Start()
@@ -76,5 +79,20 @@ public class GameController : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void ToggleCredits()
+    {
+        creditsEnabled = !creditsEnabled;
+        if (creditsEnabled)
+        {
+            creditsButtonText.text = "Back";
+            credits.SetActive(true);
+        }
+        else if (!creditsEnabled)
+        {
+            creditsButtonText.text = "Credits";
+            credits.SetActive(false);
+        }
     }
 }
