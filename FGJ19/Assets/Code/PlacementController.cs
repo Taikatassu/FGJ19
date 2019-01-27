@@ -15,6 +15,7 @@ public class PlacementController : MonoBehaviour {
     public float maxPlanetWalkSpeed = 12f;
     public float planetRadius;
     public Transform dynamicsParent;
+    public GameObject placementPrompt;
     [Header("Testing options")]
     public GameObject testPlacementObject;
     public KeyCode testButton = KeyCode.Space;
@@ -34,9 +35,13 @@ public class PlacementController : MonoBehaviour {
     }
 
     private void OnPlacementModeEnabled(GameObject newObjectToPlace) {
-        if (newObjectToPlace == null) {
+        if(newObjectToPlace == null) {
             Debug.LogWarning("Prevented placement mode enabling with null object reference!");
             return;
+        }
+
+        if(placementPrompt != null) {
+            placementPrompt.SetActive(true);
         }
 
         placementModeState = true;
@@ -48,7 +53,11 @@ public class PlacementController : MonoBehaviour {
     private void OnPlacementModeDisabled() {
         placementModeState = false;
 
-        if (objectToPlace != null) {
+        if(placementPrompt != null) {
+            placementPrompt.SetActive(false);
+        }
+
+        if(objectToPlace != null) {
             Destroy(objectToPlace);
             objectToPlace = null;
         }
@@ -60,15 +69,15 @@ public class PlacementController : MonoBehaviour {
     }
 
     private void Update() {
-        if (Input.GetKeyDown(testButton)) {
-            if (!placementModeState) {
+        if(Input.GetKeyDown(testButton)) {
+            if(!placementModeState) {
                 em.BroadcastPlacementModeEnabled(testPlacementObject);
             } else {
                 em.BroadcastPlacementModeDisabled();
             }
         }
 
-        if (placementModeState) {
+        if(placementModeState) {
             Vector2 inputPosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
             Vector2 snappedPosition = inputPosition.normalized * planetRadius;
 
@@ -76,18 +85,18 @@ public class PlacementController : MonoBehaviour {
             objectToPlace.transform.rotation
                 = Quaternion.LookRotation(Vector3.forward, snappedPosition);
 
-            if (Input.GetMouseButtonDown(0)) {
+            if(Input.GetMouseButtonDown(0)) {
                 mouseDownAfterPlacementModeEnabled = true;
             }
 
-            if (Input.GetMouseButtonUp(0) && mouseDownAfterPlacementModeEnabled) {
+            if(Input.GetMouseButtonUp(0) && mouseDownAfterPlacementModeEnabled) {
                 objectToPlace.GetComponent<Collider2D>().enabled = false;
                 Animator animator = objectToPlace.GetComponentInChildren<Animator>();
-                if (animator != null) {
+                if(animator != null) {
                     animator.Play("Spawn");
                 }
 
-                if (objectToPlace.CompareTag("Walker")) {
+                if(objectToPlace.CompareTag("Walker")) {
                     PlanetWalkController walkScript = objectToPlace.AddComponent<PlanetWalkController>();
                     walkScript.InitializePlanetWalk(minPlanetWalkSpeed, maxPlanetWalkSpeed, planetRadius);
                 }

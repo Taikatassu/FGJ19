@@ -110,7 +110,11 @@ public class GrabbableSpawner : MonoBehaviour {
         if (dynamicsParent != null) {
             foreach (Transform child in dynamicsParent.GetComponentInChildren<Transform>()) {
                 if (child != dynamicsParent) {
-                    Destroy(child.gameObject);
+                    if(Application.isPlaying) {
+                        Destroy(child.gameObject);
+                    } else {
+                        DestroyImmediate(child.gameObject);
+                    }
                 }
             }
         }
