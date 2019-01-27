@@ -25,7 +25,6 @@ public class GrabbableSpawner : MonoBehaviour {
     private void OnEnable() {
         em = EventManager._instance;
         em.OnStartGame += OnStartGame;
-        Debug.Log("GrabbableSpawner.OnEnable (subscribing to events)");
     }
 
     private void OnDisable() {
@@ -34,7 +33,6 @@ public class GrabbableSpawner : MonoBehaviour {
 
     private void OnStartGame() {
         SpawnGrabbables();
-        Debug.Log("GrabbableSpawner.OnStartGame (spawning grabbables)");
     }
 
     public void SpawnGrabbables() {
@@ -44,13 +42,11 @@ public class GrabbableSpawner : MonoBehaviour {
     }
 
     private void CalculatePoints() {
-        Debug.Log("CalculatePoints");
         points = PoissonDiscSamplingService.GeneratePoints(objectRadius, minDistanceFromCenter,
             maxDistanceFromCenter, rejectionSamples);
     }
 
     private void PlaceGrabbables() {
-        Debug.Log("PlaceGrabbables");
         if (points != null && grabbablesToSpawn.Length > 0) {
             float regionRadius = maxDistanceFromCenter * 2 + 1f;
             float halfRegionRadius = regionRadius / 2;
@@ -97,7 +93,6 @@ public class GrabbableSpawner : MonoBehaviour {
     }
 
     private void ClearGrabbables() {
-        Debug.Log("ClearGrabbables");
 
         if (spawnedGrabbables.Count > 0) {
             foreach (var grabbable in spawnedGrabbables) {
@@ -111,11 +106,10 @@ public class GrabbableSpawner : MonoBehaviour {
     }
 
     private void BruteforceClearGrabbables() {
-        Debug.Log("BruteforceClearGrabbables");
 
         if (dynamicsParent != null) {
             foreach (Transform child in dynamicsParent.GetComponentInChildren<Transform>()) {
-                if(child != dynamicsParent) {
+                if (child != dynamicsParent) {
                     Destroy(child.gameObject);
                 }
             }
