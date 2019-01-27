@@ -13,26 +13,13 @@ public class GrabbableSpawner : MonoBehaviour {
     public GrabbableInfo[] grabbablesToSpawn;
     public AnimationCurve spawnDensityFalloffTowardsRegionEdges;
 
-    List<Vector2> points;
-    List<GameObject> spawnedGrabbables;
-    Transform grabbableParent;
-    string grabbableParentName = "Grabbables";
+    List<Vector2> points = new List<Vector2>();
+    List<GameObject> spawnedGrabbables = new List<GameObject>();
 
     EventManager em;
 
-    private void Start() {
-        SpawnObjects();
-        Debug.Log("GrabbableSpawner.Start (spawning grabbables)");
-
-        GameObject marker = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        marker.transform.position = Vector3.right * -1f + Vector3.up * -2f;
-
-
-
-        //Spawn grabbables instead of primitives as markers, to see if grabbable shader / material / sprite settings has any issues!
-
-
-
+    private void Awake() {
+        BruteforceClearGrabbables();
     }
 
     private void OnEnable() {
@@ -46,43 +33,25 @@ public class GrabbableSpawner : MonoBehaviour {
     }
 
     private void OnStartGame() {
-        SpawnObjects();
+        SpawnGrabbables();
         Debug.Log("GrabbableSpawner.OnStartGame (spawning grabbables)");
-
-        GameObject marker = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        marker.transform.position = Vector3.right * 1f + Vector3.up * -2f;
     }
 
-    public void SpawnObjects() {
+    public void SpawnGrabbables() {
         CalculatePoints();
-        ClearObjects();
-        PlaceObjects();
+        ClearGrabbables();
+        PlaceGrabbables();
     }
 
     private void CalculatePoints() {
+        Debug.Log("CalculatePoints");
         points = PoissonDiscSamplingService.GeneratePoints(objectRadius, minDistanceFromCenter,
             maxDistanceFromCenter, rejectionSamples);
-
-        GameObject marker = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        marker.transform.position = Vector3.right * -2f;
     }
 
-    private void GetOrCreateGrabbableParent() {
-        if(grabbableParent == null) {
-
-            grabbableParent = GameObject.Find(grabbableParentName)?.transform;
-
-            if(grabbableParent == null) {
-                grabbableParent = new GameObject(grabbableParentName).transform;
-                grabbableParent.SetParent(dynamicsParent);
-            }
-        }
-    }
-
-    private void PlaceObjects() {
-        if(points != null && grabbablesToSpawn.Length > 0) {
-            GetOrCreateGrabbableParent();
-            spawnedGrabbables = new List<GameObject>();
+    private void PlaceGrabbables() {
+        Debug.Log("PlaceGrabbables");
+        if (points != null && grabbablesToSpawn.Length > 0) {
             float regionRadius = maxDistanceFromCenter * 2 + 1f;
             float halfRegionRadius = regionRadius / 2;
             Vector2 offset = -Vector2.one * halfRegionRadius;
@@ -91,19 +60,19 @@ public class GrabbableSpawner : MonoBehaviour {
             //Create a list of rarity thresholds
             float[] grabbableRarityThresholds = new float[grabbablesToSpawn.Length];
             grabbableRarityThresholds[0] = (grabbablesToSpawn[0].rarity);
-            for(int i = 1; i < grabbablesToSpawn.Length; i++) {
+            for (int i = 1; i < grabbablesToSpawn.Length; i++) {
                 grabbableRarityThresholds[i] = (grabbableRarityThresholds[i - 1]
                     + grabbablesToSpawn[i].rarity);
             }
             float maxRarityThreshold
                 = grabbableRarityThresholds[grabbableRarityThresholds.Length - 1];
 
-            foreach(var point in points) {
+            foreach (var point in points) {
                 //Calculate placement for a grabbable on the planet surface
                 Vector2 spawnPosition = point + offset;
                 float positionDstFromMinEdge = spawnPosition.magnitude - minDistanceFromCenter;
                 float positionDstPercentage = positionDstFromMinEdge / spawnAreaRadius;
-                if(Random.value > spawnDensityFalloffTowardsRegionEdges.
+                if (Random.value > spawnDensityFalloffTowardsRegionEdges.
                     Evaluate(positionDstPercentage)) {
                     continue;
                 }
@@ -111,8 +80,8 @@ public class GrabbableSpawner : MonoBehaviour {
                 //Choose random grabbable to spawn taking account the rarity weights
                 float spawnRandom = Random.value * maxRarityThreshold;
                 GrabbableInfo grabbableToSpawn = null;
-                for(int i = 0; i < grabbableRarityThresholds.Length; i++) {
-                    if(spawnRandom < grabbableRarityThresholds[i]) {
+                for (int i = 0; i < grabbableRarityThresholds.Length; i++) {
+                    if (spawnRandom < grabbableRarityThresholds[i]) {
                         grabbableToSpawn = grabbablesToSpawn[i];
                         break;
                     }
@@ -121,31 +90,35 @@ public class GrabbableSpawner : MonoBehaviour {
                 //Instantiate the chosen grabbable
                 GameObject spawnedObject = Instantiate(grabbableToSpawn.grabbablePrefab,
                     spawnPosition, Quaternion.Euler(Vector3.forward * Random.Range(0f, 360f)),
-                    grabbableParent);
+                    dynamicsParent);
                 spawnedGrabbables.Add(spawnedObject);
             }
         }
-
-        GameObject marker = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        marker.transform.position = Vector3.right * 2f;
     }
 
-    private void ClearObjects() {
-        GetOrCreateGrabbableParent();
+    private void ClearGrabbables() {
+        Debug.Log("ClearGrabbables");
 
-        if(grabbableParent != null) {
-            if(Application.isEditor) {
-                DestroyImmediate(grabbableParent.gameObject);
-            } else {
-                Destroy(grabbableParent.gameObject);
+        if (spawnedGrabbables.Count > 0) {
+            foreach (var grabbable in spawnedGrabbables) {
+                if (Application.isPlaying) {
+                    Destroy(grabbable);
+                } else {
+                    DestroyImmediate(grabbable);
+                }
             }
         }
+    }
 
-        if(spawnedGrabbables != null) {
-            spawnedGrabbables.Clear();
+    private void BruteforceClearGrabbables() {
+        Debug.Log("BruteforceClearGrabbables");
+
+        if (dynamicsParent != null) {
+            foreach (Transform child in dynamicsParent.GetComponentInChildren<Transform>()) {
+                if(child != dynamicsParent) {
+                    Destroy(child.gameObject);
+                }
+            }
         }
-
-        GameObject marker = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        marker.transform.position = Vector3.zero;
     }
 }

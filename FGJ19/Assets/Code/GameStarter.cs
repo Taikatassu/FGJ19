@@ -14,9 +14,9 @@ public class GameStarter : MonoBehaviour {
     }
 
     private void StartGame() {
+        Debug.Log("GameStarter.StartGame");
         EventManager em = EventManager._instance;
         em.BroadcastStartGame();
         em.BroadcastPlacementModeDisabled();
-        Debug.Log("GameStarter.StartGame");
     }
 }

@@ -12,7 +12,7 @@ public class FloatingGrabbaleSpawnerEditor : Editor {
         GrabbableSpawner _target = (GrabbableSpawner)target;
 
         if (GUILayout.Button("Generate points")) {
-            _target.SpawnObjects();
+            _target.SpawnGrabbables();
         }
     }
 }
