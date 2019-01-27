@@ -1,23 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
-[CustomEditor(typeof(FloatingGrabbableSpawner))]
-public class FloatingGrabbaleSpawnerEditor : Editor {
-
-    public override void OnInspectorGUI() {
-
-        DrawDefaultInspector();
-        FloatingGrabbableSpawner _target = (FloatingGrabbableSpawner)target;
-
-        if(GUILayout.Button("Generate points")) {
-            _target.SpawnObjects();
-        }
-    }
-}
-
-public class FloatingGrabbableSpawner : MonoBehaviour {
+public class GrabbableSpawner : MonoBehaviour {
 
     public float objectRadius = 0.5f;
     public float minDistanceFromCenter = 2f;

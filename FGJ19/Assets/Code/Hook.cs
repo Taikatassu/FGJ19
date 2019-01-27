@@ -13,7 +13,7 @@ public class Hook : MonoBehaviour {
     }
 
     private void Update() {
-
+        //Keep rotation fixed relative to player
         t.rotation = Quaternion.LookRotation(Vector3.forward, player.position - t.position);
     }
 
