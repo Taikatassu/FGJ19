@@ -1,24 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!95 &1731454685020344906
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1558024833378938029}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1e138226cb294344d9982fb85e9affb6, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &7350252152409815730
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -96,20 +77,25 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 8331202150285748713, guid: f80e73ce75e767c42b4d75d278b33e0c,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8331202151651350046, guid: f80e73ce75e767c42b4d75d278b33e0c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.259
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8331202151651350046, guid: f80e73ce75e767c42b4d75d278b33e0c,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.13736263
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 8331202151651350046, guid: f80e73ce75e767c42b4d75d278b33e0c,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.1312336
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 8331202151651350017, guid: f80e73ce75e767c42b4d75d278b33e0c,
         type: 3}
@@ -142,11 +128,20 @@ PrefabInstance:
       propertyPath: m_DrawMode
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8331202151651350017, guid: f80e73ce75e767c42b4d75d278b33e0c,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 4.34
+      objectReference: {fileID: 0}
+    - target: {fileID: 8331202151651350017, guid: f80e73ce75e767c42b4d75d278b33e0c,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 3.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 6420355907715277509, guid: f80e73ce75e767c42b4d75d278b33e0c,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 4b82f4b13fea8c748b311be3901f5b45, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f80e73ce75e767c42b4d75d278b33e0c, type: 3}
---- !u!1 &1558024833378938029 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8331202151651350047, guid: f80e73ce75e767c42b4d75d278b33e0c,
-    type: 3}
-  m_PrefabInstance: {fileID: 7350252152409815730}
-  m_PrefabAsset: {fileID: 0}

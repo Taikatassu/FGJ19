@@ -98,6 +98,7 @@ MonoBehaviour:
   looker: {fileID: 1780419660967783906}
   rotator: {fileID: 1780419660600467318}
   reticle: {fileID: 1780419660667628187}
+  controlsEnabled: 0
   spawnableHook: {fileID: 5326835847381715084, guid: dd15c63e25049064b8e3c897c4517109,
     type: 3}
   hookVFX: {fileID: 1992523829411524322, guid: 87891aa8466592d4aab18056929b86f5, type: 3}
@@ -327,7 +328,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 30
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -335,7 +336,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1780419660967783906
@@ -440,7 +441,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 29
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 0.6132076, g: 0.6132076, b: 0.6132076, a: 0.54509807}
+  m_Color: {r: 0.41585082, g: 0.7034104, b: 0.8396226, a: 0.54509807}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
@@ -519,7 +520,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 29
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 0.6132076, g: 0.6132076, b: 0.6132076, a: 0.54509807}
+  m_Color: {r: 0.41585082, g: 0.7034104, b: 0.8396226, a: 0.54509807}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
@@ -540,7 +541,7 @@ GameObject:
   - component: {fileID: 3242771518019263485}
   - component: {fileID: 2010293670431846712}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: ReticleVisuals
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -554,8 +555,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6644940948450304587}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -8.5, y: 0, z: 0}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_Children: []
   m_Father: {fileID: 1780419660667628186}
   m_RootOrder: 0
@@ -597,11 +598,11 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 30
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 67268a9d7c360334999266ca57768378, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.7058824}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 1
+  m_DrawMode: 0
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0

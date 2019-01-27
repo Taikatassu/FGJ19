@@ -11,6 +11,8 @@ public class PlacementController : MonoBehaviour {
     private List<GameObject> placedObjects;
     private bool mouseDownAfterPlacementModeEnabled = false;
 
+    public float minPlanetWalkSpeed = 2f;
+    public float maxPlanetWalkSpeed = 12f;
     public float planetRadius;
     public Transform dynamicsParent;
     [Header("Testing options")]
@@ -32,7 +34,7 @@ public class PlacementController : MonoBehaviour {
     }
 
     private void OnPlacementModeEnabled(GameObject newObjectToPlace) {
-        if(newObjectToPlace == null) {
+        if (newObjectToPlace == null) {
             Debug.LogWarning("Prevented placement mode enabling with null object reference!");
             return;
         }
@@ -46,7 +48,7 @@ public class PlacementController : MonoBehaviour {
     private void OnPlacementModeDisabled() {
         placementModeState = false;
 
-        if(objectToPlace != null) {
+        if (objectToPlace != null) {
             Destroy(objectToPlace);
             objectToPlace = null;
         }
@@ -58,15 +60,15 @@ public class PlacementController : MonoBehaviour {
     }
 
     private void Update() {
-        if(Input.GetKeyDown(testButton)) {
-            if(!placementModeState) {
+        if (Input.GetKeyDown(testButton)) {
+            if (!placementModeState) {
                 em.BroadcastPlacementModeEnabled(testPlacementObject);
             } else {
                 em.BroadcastPlacementModeDisabled();
             }
         }
 
-        if(placementModeState) {
+        if (placementModeState) {
             Vector2 inputPosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
             Vector2 snappedPosition = inputPosition.normalized * planetRadius;
 
@@ -74,11 +76,22 @@ public class PlacementController : MonoBehaviour {
             objectToPlace.transform.rotation
                 = Quaternion.LookRotation(Vector3.forward, snappedPosition);
 
-            if(Input.GetMouseButtonDown(0)) {
+            if (Input.GetMouseButtonDown(0)) {
                 mouseDownAfterPlacementModeEnabled = true;
             }
 
-            if(Input.GetMouseButtonUp(0) && mouseDownAfterPlacementModeEnabled) {
+            if (Input.GetMouseButtonUp(0) && mouseDownAfterPlacementModeEnabled) {
+                objectToPlace.GetComponent<Collider2D>().enabled = false;
+                Animator animator = objectToPlace.GetComponentInChildren<Animator>();
+                if (animator != null) {
+                    animator.Play("Spawn");
+                }
+
+                if (objectToPlace.CompareTag("Walker")) {
+                    PlanetWalkController walkScript = objectToPlace.AddComponent<PlanetWalkController>();
+                    walkScript.InitializePlanetWalk(minPlanetWalkSpeed, maxPlanetWalkSpeed, planetRadius);
+                }
+
                 placedObjects.Add(objectToPlace);
                 objectToPlace = null;
                 placementModeState = false;

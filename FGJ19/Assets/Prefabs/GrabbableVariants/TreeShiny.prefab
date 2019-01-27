@@ -99,17 +99,17 @@ PrefabInstance:
     - target: {fileID: 8331202151651350046, guid: f80e73ce75e767c42b4d75d278b33e0c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.259
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8331202151651350046, guid: f80e73ce75e767c42b4d75d278b33e0c,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.08976661
+      value: 0.18
       objectReference: {fileID: 0}
     - target: {fileID: 8331202151651350046, guid: f80e73ce75e767c42b4d75d278b33e0c,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.07692308
+      value: 0.17
       objectReference: {fileID: 0}
     - target: {fileID: 8331202151651350017, guid: f80e73ce75e767c42b4d75d278b33e0c,
         type: 3}
@@ -142,6 +142,11 @@ PrefabInstance:
       propertyPath: m_DrawMode
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6420355907715277509, guid: f80e73ce75e767c42b4d75d278b33e0c,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 4b82f4b13fea8c748b311be3901f5b45, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f80e73ce75e767c42b4d75d278b33e0c, type: 3}
 --- !u!1 &2403099952147680109 stripped

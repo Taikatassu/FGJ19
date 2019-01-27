@@ -31,6 +31,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cat
       objectReference: {fileID: 0}
+    - target: {fileID: 8331202150285748710, guid: f80e73ce75e767c42b4d75d278b33e0c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Walker
+      objectReference: {fileID: 0}
     - target: {fileID: 8331202150285748713, guid: f80e73ce75e767c42b4d75d278b33e0c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -99,17 +104,17 @@ PrefabInstance:
     - target: {fileID: 8331202151651350046, guid: f80e73ce75e767c42b4d75d278b33e0c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.25
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8331202151651350046, guid: f80e73ce75e767c42b4d75d278b33e0c,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.10638298
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 8331202151651350046, guid: f80e73ce75e767c42b4d75d278b33e0c,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.10309278
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 8331202151651350017, guid: f80e73ce75e767c42b4d75d278b33e0c,
         type: 3}
