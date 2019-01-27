@@ -19,13 +19,11 @@ public class DeliveryButton : MonoBehaviour {
     }
 
     void OnHookCollision(Collider2D col) {
-        print("DeliveryButton.OnHookCollision");
         gameObject.SetActive(true);
         grabbedObject = col.gameObject;
     }
 
     public void Deliver() {
-        print("DeliveryButton.Deliver");
         em.BroadcastPlacementModeEnabled(grabbedObject);
         Destroy(grabbedObject);
         gameObject.SetActive(false);

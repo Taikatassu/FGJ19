@@ -15,6 +15,7 @@ public class Player : MonoBehaviour {
     bool hookLerpReturn = false;
     bool playerLerpOK = false;
     bool placementEnabled = false;
+    bool gameOver = false;
     public GameObject spawnableHook;
     GameObject hook;
     public GameObject hookVFX;
@@ -41,26 +42,34 @@ public class Player : MonoBehaviour {
         em = EventManager._instance;
         em.OnPlacementModeEnabled += OnPlacementModeEnabled;
         em.OnPlacementModeDisabled += OnPlacementModeDisabled;
+        em.OnGameOver += OnGameOver;
+        em.OnKeepGoing += OnKeepGoing;
     }
 
     void OnDisable() {
         em.OnPlacementModeEnabled -= OnPlacementModeEnabled;
         em.OnPlacementModeDisabled -= OnPlacementModeDisabled;
+        em.OnGameOver -= OnGameOver;
+        em.OnKeepGoing -= OnKeepGoing;
     }
 
     void OnPlacementModeEnabled(GameObject objectToPlace) {
         placementEnabled = true;
-        Debug.Log("Player.OnPlacementModeEnabled");
     }
 
     void OnPlacementModeDisabled() {
         placementEnabled = false;
-        Debug.Log("Player.OnPlacementModeDisabled " + Time.frameCount);
+    }
+
+    private void OnGameOver() {
+        gameOver = true;
+    }
+
+    private void OnKeepGoing() {
+        gameOver = false;
     }
 
     void OnHookCollision(Collider2D col) {
-        //Use this col somehow to inform the canvas that this object can be delivered?
-        print("Player.OnHookCollision");
         if(hookLerpOK) {
             hookLerpOK = false;
             hookLerpReturn = false;
@@ -73,7 +82,7 @@ public class Player : MonoBehaviour {
     }
 
     void Update() {
-        if(!hookLerpOK && !hookLerpReturn && !playerLerpOK && !placementEnabled) {
+        if(!hookLerpOK && !hookLerpReturn && !playerLerpOK && !placementEnabled && !gameOver) {
             if(Input.GetMouseButton(0)) {
                 RaycastHit2D hitInfo = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Input.mousePosition));
                 Debug.DrawRay(Camera.main.ScreenPointToRay(Input.mousePosition).origin, Camera.main.ScreenPointToRay(Input.mousePosition).direction, Color.red, 5f);
@@ -98,7 +107,6 @@ public class Player : MonoBehaviour {
                 travelPos.position = reticle.transform.position;
                 currentHookLerpTime = 0;
                 hookLerpOK = true;
-                Debug.Log("Player.ShotHook " + Time.frameCount);
             }
         }
 

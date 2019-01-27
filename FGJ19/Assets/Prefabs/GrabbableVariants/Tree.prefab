@@ -96,6 +96,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 8331202151651350046, guid: f80e73ce75e767c42b4d75d278b33e0c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.259
+      objectReference: {fileID: 0}
     - target: {fileID: 8331202151651350017, guid: f80e73ce75e767c42b4d75d278b33e0c,
         type: 3}
       propertyPath: m_Color.r
@@ -117,10 +122,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300018, guid: 05168151ad960a54ab4311d7f608591e,
         type: 3}
-    - target: {fileID: 8331202151651350046, guid: f80e73ce75e767c42b4d75d278b33e0c,
+    - target: {fileID: 8331202151651350017, guid: f80e73ce75e767c42b4d75d278b33e0c,
         type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.259
+      propertyPath: m_SortingOrder
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f80e73ce75e767c42b4d75d278b33e0c, type: 3}

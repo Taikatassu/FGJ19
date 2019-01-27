@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraController : MonoBehaviour
-{
+public class CameraController : MonoBehaviour {
     private EventManager em;
     private bool followPlayer;
     private Transform t;
@@ -20,46 +19,33 @@ public class CameraController : MonoBehaviour
     public float placementModeOrthSize = 10f;
     public float introModeInitialOrthSize = 30f;
 
-    private void OnEnable()
-    {
+    private void OnEnable() {
         t = transform;
         cam = GetComponent<Camera>();
         em = EventManager._instance;
+
         em.OnStartGame += OnStartGame;
-        em.OnPlacementModeEnabled += OnPlacementModeEnabled;
-        em.OnPlacementModeDisabled += OnPlacementModeDisabled;
+        em.OnPlacementModeEnabled += EnablePlanetView;
+        em.OnPlacementModeDisabled += EnablePlayerView;
+        em.OnGameOver += EnablePlanetView;
+        em.OnKeepGoing += EnablePlayerView;
     }
 
-    private void OnDisable()
-    {
+    private void OnDisable() {
         em.OnStartGame -= OnStartGame;
-        em.OnPlacementModeEnabled -= OnPlacementModeEnabled;
-        em.OnPlacementModeDisabled -= OnPlacementModeDisabled;
+        em.OnPlacementModeEnabled -= EnablePlanetView;
+        em.OnPlacementModeDisabled -= EnablePlayerView;
+        em.OnGameOver -= EnablePlanetView;
+        em.OnKeepGoing -= EnablePlayerView;
     }
 
-    private void OnStartGame()
-    {
+    private void OnStartGame() {
         t.position = player.transform.position;
         cam.orthographicSize = introModeInitialOrthSize;
     }
-
-    private void OnPlacementModeEnabled(GameObject objectToPlace)
-    {
-        followPlayer = false;
-        cameraTargetPosition = Vector2.zero;
-        currentOrthSize = placementModeOrthSize;
-    }
-
-    private void OnPlacementModeDisabled()
-    {
-        followPlayer = true;
-        currentOrthSize = playerModeOrthSize;
-    }
-
-    private void Update()
-    {
-        if (followPlayer)
-        {
+    
+    private void Update() {
+        if (followPlayer) {
             cameraTargetPosition = player.position;
         }
 
@@ -69,5 +55,21 @@ public class CameraController : MonoBehaviour
 
         cam.orthographicSize = Mathf.SmoothDamp(cam.orthographicSize, currentOrthSize,
             ref zoomRefVel, cameraZoomSmoothTime);
+    }
+
+    private void EnablePlanetView() {
+        followPlayer = false;
+        cameraTargetPosition = Vector2.zero;
+        currentOrthSize = placementModeOrthSize;
+    }
+
+    //Note: GameObject parameter enables subscription to placement mode event
+    private void EnablePlanetView(GameObject obj) {
+        EnablePlanetView();
+    }
+
+    private void EnablePlayerView() {
+        followPlayer = true;
+        currentOrthSize = playerModeOrthSize;
     }
 }

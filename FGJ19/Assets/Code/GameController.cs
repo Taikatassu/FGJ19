@@ -4,55 +4,50 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class GameController : MonoBehaviour
-{
+public class GameController : MonoBehaviour {
+    private EventManager em;
+    bool gameOvered = false;
 
     public Slider timerBar;
     public GameObject gameOverUI;
     public GameObject disableControls;
     public float decreasableAmount = 0.016f;
-    bool gameOvered = false;
+    public GameObject disableOnGameOver;
 
-
-
-    void Start()
-    {
-
+    void Start() {
+        em = EventManager._instance;
     }
 
 
-    void Update()
-    {
-        if (timerBar.value > 0)
-        {
+    void Update() {
+        if (timerBar.value > 0) {
             timerBar.value -= decreasableAmount * Time.deltaTime;
-        }
-        else if (!gameOvered)
-        {
+        } else if (!gameOvered) {
             //DISABLE CONTROLS!!
             //MOVE CAMERA TO PLANET!!
             GameOver();
+            em.BroadcastGameOver();
         }
     }
 
-    void GameOver()
-    {
+    void GameOver() {
         gameOvered = true;
         disableControls.SetActive(true);
         gameOverUI.SetActive(true);
+        disableOnGameOver.SetActive(false);
     }
 
-    public void Restart()
-    {
+    public void Restart() {
         SceneManager.LoadScene("Scene00");
     }
 
-    public void KeepGoing()
-    {
+    public void KeepGoing() {
+        disableOnGameOver.SetActive(true);
         gameOverUI.SetActive(false);
         disableControls.SetActive(false);
         timerBar.value = 1;
         gameOvered = false;
+        em.BroadcastKeepGoing();
         //MOVE CAMERA BACK TO PLAYER!!
     }
 }

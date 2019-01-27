@@ -18,7 +18,6 @@ public class Hook : MonoBehaviour {
     }
 
     void OnCollisionEnter2D(Collision2D other) {
-        print("Hook.OnCollisionEnter2D");
         if(other.collider.gameObject.tag != "Moon") {
             OnHookCollision?.Invoke(other.collider);
         }

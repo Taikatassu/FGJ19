@@ -7,9 +7,9 @@ public class EventManager : MonoBehaviour {
     public static EventManager _instance;
 
     private void Awake() {
-        if(_instance == null) {
+        if (_instance == null) {
             _instance = this;
-        } else if(_instance != this) {
+        } else if (_instance != this) {
             Destroy(gameObject);
             return;
         }
@@ -42,6 +42,16 @@ public class EventManager : MonoBehaviour {
     public event IntVoid OnPlacedObjectCountChanged;
     public void BroadcastPlacedObjectCountChanged(int newCount) {
         OnPlacedObjectCountChanged?.Invoke(newCount);
+    }
+
+    public event EmptyVoid OnGameOver;
+    public void BroadcastGameOver() {
+        OnGameOver?.Invoke();
+    }
+
+    public event EmptyVoid OnKeepGoing;
+    public void BroadcastKeepGoing() {
+        OnKeepGoing?.Invoke();
     }
 
 }
