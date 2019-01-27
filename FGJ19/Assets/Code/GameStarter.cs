@@ -5,8 +5,18 @@ using UnityEngine;
 public class GameStarter : MonoBehaviour {
 
     void Start() {
+        StartCoroutine("StartGameAtFrameEnd");
+    }
+
+    IEnumerator StartGameAtFrameEnd() {
+        yield return new WaitForEndOfFrame();
+        StartGame();
+    }
+
+    private void StartGame() {
         EventManager em = EventManager._instance;
         em.BroadcastStartGame();
         em.BroadcastPlacementModeDisabled();
+        Debug.Log("GameStarter.StartGame");
     }
 }

@@ -20,9 +20,25 @@ public class GrabbableSpawner : MonoBehaviour {
 
     EventManager em;
 
+    private void Start() {
+        SpawnObjects();
+        Debug.Log("GrabbableSpawner.Start (spawning grabbables)");
+
+        GameObject marker = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        marker.transform.position = Vector3.right * -1f + Vector3.up * -2f;
+
+
+
+        //Spawn grabbables instead of primitives as markers, to see if grabbable shader / material / sprite settings has any issues!
+
+
+
+    }
+
     private void OnEnable() {
         em = EventManager._instance;
         em.OnStartGame += OnStartGame;
+        Debug.Log("GrabbableSpawner.OnEnable (subscribing to events)");
     }
 
     private void OnDisable() {
@@ -31,6 +47,10 @@ public class GrabbableSpawner : MonoBehaviour {
 
     private void OnStartGame() {
         SpawnObjects();
+        Debug.Log("GrabbableSpawner.OnStartGame (spawning grabbables)");
+
+        GameObject marker = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        marker.transform.position = Vector3.right * 1f + Vector3.up * -2f;
     }
 
     public void SpawnObjects() {
@@ -42,6 +62,9 @@ public class GrabbableSpawner : MonoBehaviour {
     private void CalculatePoints() {
         points = PoissonDiscSamplingService.GeneratePoints(objectRadius, minDistanceFromCenter,
             maxDistanceFromCenter, rejectionSamples);
+
+        GameObject marker = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        marker.transform.position = Vector3.right * -2f;
     }
 
     private void GetOrCreateGrabbableParent() {
@@ -100,13 +123,11 @@ public class GrabbableSpawner : MonoBehaviour {
                     spawnPosition, Quaternion.Euler(Vector3.forward * Random.Range(0f, 360f)),
                     grabbableParent);
                 spawnedGrabbables.Add(spawnedObject);
-
-                //GameObject spawnedObject = Instantiate(grabbablesToSpawn[Random.Range(0,
-                //    grabbablesToSpawn.Length)].grabbablePrefab, spawnPosition,
-                //    Quaternion.Euler(Vector3.forward * Random.Range(0f, 360f)), grabbableParent);
-                //spawnedGrabbables.Add(spawnedObject);
             }
         }
+
+        GameObject marker = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        marker.transform.position = Vector3.right * 2f;
     }
 
     private void ClearObjects() {
@@ -123,5 +144,8 @@ public class GrabbableSpawner : MonoBehaviour {
         if(spawnedGrabbables != null) {
             spawnedGrabbables.Clear();
         }
+
+        GameObject marker = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        marker.transform.position = Vector3.zero;
     }
 }

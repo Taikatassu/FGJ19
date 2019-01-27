@@ -26,7 +26,7 @@ public class HookLineVisualizer : MonoBehaviour {
         endPoint = newHook.transform;
     }
 
-    private void Update() {
+    private void LateUpdate() {
         if(startPoint != null && endPoint != null) {
             Vector3[] linePositions = new Vector3[2] {
                 startPoint.position,
